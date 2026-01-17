@@ -6,9 +6,7 @@ use anyhow::Result;
 use dynamo_llm::block_manager::block::{
     data::logical::distributed_leader_worker::DistributedLeaderWorkerResources, locality::Logical,
 };
-use dynamo_llm::block_manager::kv_consolidator::{
-    EventSource, KvEventConsolidatorConfig,
-};
+use dynamo_llm::block_manager::kv_consolidator::{EventSource, KvEventConsolidatorConfig};
 use dynamo_llm::block_manager::offload::filter::FrequencyFilter;
 use dynamo_llm::block_manager::{BasicMetadata, BlockParallelismStrategy};
 use dynamo_runtime::DistributedRuntime;
@@ -17,9 +15,13 @@ use pyo3::PyResult;
 use std::time::Duration;
 use tokio_util::sync::CancellationToken;
 
+pub mod block;
+pub mod block_list;
 mod cache_stats;
 mod controller;
 mod distributed;
+pub mod dlpack;
+pub mod layer;
 
 pub mod vllm;
 
@@ -368,7 +370,8 @@ impl BlockManagerBuilder {
         }
 
         if let Some((engine_ep, output_ep, engine_source)) = self.consolidator_config {
-            config_builder = config_builder.consolidator_config(engine_ep, output_ep, engine_source);
+            config_builder =
+                config_builder.consolidator_config(engine_ep, output_ep, engine_source);
         }
 
         let config = config_builder.build()?;

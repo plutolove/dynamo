@@ -7,7 +7,7 @@
 
 use super::*;
 use dlpark::prelude::{DataType, Device, ManagerCtx, ShapeAndStrides, ToTensor};
-use pyo3::{ffi::c_str, prelude::IntoPy, types::PyTuple, PyObject, PyResult, Python};
+use pyo3::{PyObject, PyResult, Python, ffi::c_str, prelude::IntoPy, types::PyTuple};
 use std::sync::{Arc, Mutex};
 
 struct DlPackTensor {

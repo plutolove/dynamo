@@ -13,6 +13,7 @@ members = [
     "lib/parsers",
     "lib/bindings/c",
     "lib/bindings/python/codegen",
+    "lib/bindings/kvbm",
     "lib/engines/*",
     "lib/config",
 ]
@@ -28,6 +29,7 @@ default-members = [
     "lib/async-openai",
     "lib/parsers",
     "lib/bindings/c",
+    "lib/bindings/kvbm",
 ]
 resolver = "3"
 
